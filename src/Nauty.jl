@@ -279,8 +279,7 @@ function baked_canonical_form_color(g::GraphType,labelling, partition) where Gra
 end
 
 function baked_canonical_form_and_stats(g::GraphType) where GraphType <: LightGraphs.AbstractGraph
-    g = lg_to_nauty(g)
-    (num_vertices, num_setwords) = size(g, 1, 2)
+    g, num_vertices, num_setwords = lg_to_nauty(g)
 
     labelling = zeros(Cint, size(g))
     partition = zero(labelling)
@@ -351,7 +350,7 @@ function lg_to_nauty(g::GraphType) where GraphType <: LightGraphs.AbstractGraph
 
     # nauty_graph as a vector of UInt64s, just what Nauty wants.
     # For the purposes of ccall, an Array{T} can be reasonably safely treated as Ptr{T}
-    return arr.chunks #, num_setwords, num_vertices
+    return arr.chunks, num_vertices, num_setwords
 end
 
 function fadjlist(g::GraphType) where GraphType <: LightGraphs.SimpleGraphs.AbstractSimpleGraph
