@@ -17,4 +17,4 @@ nautyfiles = joinpath.(nautydir, ["nauty","nautil","naugraph", "schreier","naurn
 nautywrapper = joinpath(depsdir, "minnautywrap.c") 
 nautylib = joinpath(depsdir, "minnautywrap." * Libdl.dlext) 
 
-run(`gcc -DWORDSIZE=64 -DMAXN=WORDSIZE -O4 -o $nautylib $nautywrapper $nautyfiles -shared -fPIC -I $nautydir`)
+run(`gcc -DWORDSIZE=64 -DMAXN=0 -O4 -o $nautylib $nautywrapper $nautyfiles -shared -fPIC -I $nautydir`)
